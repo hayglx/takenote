@@ -28,9 +28,9 @@ function* loginUser() {
     if (isDemo) {
       yield put(loginSuccess({ name: 'Demo User' }))
     } else {
-      const { data } = yield axios('/api/auth/login')
+      // const { data } = yield axios('/api/auth/login')
 
-      yield put(loginSuccess(data))
+      yield put(loginSuccess({ name: 'User' }))
     }
   } catch (error) {
     yield put(loginError(error.message))
@@ -59,7 +59,7 @@ function* fetchNotes() {
     if (isDemo) {
       data = yield requestNotes()
     } else {
-      data = (yield axios('/api/sync/notes')).data
+      data = (yield axios.get('https://qwevzx.asia/takenote/note/')).data
     }
     const { notesSortKey } = yield select(getSettings)
 
@@ -76,7 +76,7 @@ function* fetchCategories() {
     if (isDemo) {
       data = yield requestCategories()
     } else {
-      data = (yield axios('/api/sync/categories')).data
+      data = (yield axios.get('https://qwevzx.asia/takenote/category/')).data
     }
 
     yield put(loadCategoriesSuccess(data))
@@ -102,7 +102,10 @@ function* syncData({ payload }: SyncAction) {
     if (isDemo) {
       yield saveState(payload)
     } else {
-      yield axios.post('/api/sync', payload)
+      console.log('payload', payload)
+      // yield axios(`/api/auth/logout`)
+
+      yield axios.post('https://qwevzx.asia/takenote/addnote/', payload)
     }
     yield put(syncSuccess(dayjs().format()))
   } catch (error) {

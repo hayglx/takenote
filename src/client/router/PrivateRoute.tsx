@@ -12,11 +12,6 @@ export const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component
   const { isAuthenticated } = useSelector(getAuth)
 
   return (
-    <Route
-      render={(props) =>
-        isAuthenticated === true ? <Component {...props} /> : <Redirect to="/" />
-      }
-      {...rest}
-    />
+    <Route render={(props) => (true ? <Component {...props} /> : <Redirect to="/" />)} {...rest} />
   )
 }

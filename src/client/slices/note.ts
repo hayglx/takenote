@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
+import axios from 'axios'
 
 import { Folder, NotesSortKey } from '@/utils/enums'
 import { NoteItem, NoteState } from '@/types'
@@ -115,6 +116,12 @@ const noteSlice = createSlice({
     },
 
     deleteNotes: (state, { payload }: PayloadAction<string[]>) => {
+      //removeNote
+      console.log('aaa', payload)
+      try {
+        axios.delete('https://qwevzx.asia/takenote/addnote/', { data: { notes: payload } })
+      } catch (error) {}
+
       state.notes = state.notes.filter((note) => !payload.includes(note.id))
       state.activeNoteId = getNewActiveNoteId(
         state.notes,
@@ -150,6 +157,11 @@ const noteSlice = createSlice({
     },
 
     removeCategoryFromNotes: (state, { payload }: PayloadAction<string>) => {
+      //removeNote
+      console.log('aaa', payload)
+      try {
+        axios.delete('https://qwevzx.asia/takenote/addnote/', { data: { category: payload } })
+      } catch (error) {}
       state.notes.map((note) => {
         if (note.category === payload) {
           note.category = ''

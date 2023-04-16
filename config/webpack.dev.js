@@ -31,7 +31,10 @@ module.exports = merge(common, {
     open: true,
     compress: true,
     hot: true,
-    port: 3000,
+    port: 80,
+    host: '0.0.0.0', //your ip address
+    // disableHostCheck: false,
+    // allowedHosts: "*",
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

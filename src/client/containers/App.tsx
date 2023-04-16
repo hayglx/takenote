@@ -10,7 +10,7 @@ import { PrivateRoute } from '@/router/PrivateRoute'
 import { getAuth } from '@/selectors'
 import { login } from '@/slices/auth'
 
-const isDemo = process.env.DEMO
+const isDemo = false //process.env.DEMO
 
 export const App: React.FC = () => {
   // ===========================================================================
@@ -58,13 +58,13 @@ export const App: React.FC = () => {
       <Switch>
         {isDemo ? (
           <>
-            <Route exact path="/" component={LandingPage} />
-            <Route path="/app" component={TakeNoteApp} />
+            {/* <Route exact path="/" component={LandingPage} /> */}
+            <Route path="/" component={TakeNoteApp} />
           </>
         ) : (
           <>
-            <PublicRoute exact path="/" component={LandingPage} />
-            <PrivateRoute path="/app" component={TakeNoteApp} />
+            {/* <PublicRoute exact path="/" component={LandingPage} /> */}
+            <PrivateRoute path="/" component={TakeNoteApp} />
           </>
         )}
 
